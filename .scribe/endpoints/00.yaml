@@ -1,0 +1,182 @@
+name: Authentification
+description: |-
+
+  APIs pour l'authentification des utilisateurs.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/auth/login
+    metadata:
+      custom: []
+      groupName: Authentification
+      groupDescription: |-
+
+        APIs pour l'authentification des utilisateurs.
+      subgroup: ''
+      subgroupDescription: ''
+      title: Connexion
+      description: "Authentifie un utilisateur avec son nom d'utilisateur et son PIN."
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      username:
+        custom: []
+        name: username
+        description: "Nom d'utilisateur."
+        required: true
+        example: admin
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      pin:
+        custom: []
+        name: pin
+        description: 'PIN à 4 chiffres.'
+        required: true
+        example: '0000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      username: admin
+      pin: '0000'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"user": {...}, "token": "..."}'
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: '{"message": "Identifiants incorrects."}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/auth/logout
+    metadata:
+      custom: []
+      groupName: Authentification
+      groupDescription: |-
+
+        APIs pour l'authentification des utilisateurs.
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/auth/me
+    metadata:
+      custom: []
+      groupName: Authentification
+      groupDescription: |-
+
+        APIs pour l'authentification des utilisateurs.
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          vary: Origin
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: api/v1/auth/profile
+    metadata:
+      custom: []
+      groupName: Authentification
+      groupDescription: |-
+
+        APIs pour l'authentification des utilisateurs.
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

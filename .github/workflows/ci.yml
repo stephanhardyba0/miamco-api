@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: miamco_ci
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -ppassword"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, pdo_mysql, gd, zip
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=miamco_app_ci/' .env
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=root/' .env
+          sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=password/' .env
+
+      - name: Run tests
+        env:
+          DB_DATABASE: miamco_ci
+          DB_USERNAME: root
+          DB_PASSWORD: password
+        run: php artisan test
+
+      - name: Code style (Pint)
+        run: ./vendor/bin/pint --test || true
